@@ -2,13 +2,16 @@ import { Outlet, Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-const brandSerif = { fontFamily: "'Cormorant Garamond', serif" } as const;
+const brandMontserrat = {
+  fontFamily: "'Montserrat', sans-serif",
+  fontOpticalSizing: "auto" as const,
+};
 
 function BrandMonogram() {
   return (
     <div
       className="flex size-11 shrink-0 items-center justify-center rounded-sm border-2 text-[11px] font-semibold leading-none tracking-[0.22em] text-[var(--gold)] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:size-[52px] sm:text-sm sm:tracking-[0.18em]"
-      style={{ borderColor: "var(--gold)" }}
+      style={{ borderColor: "var(--gold)", ...brandMontserrat }}
       aria-hidden
     >
       VFH
@@ -20,14 +23,14 @@ function BrandWordmark() {
   return (
     <div className="flex min-w-0 flex-col">
       <span
-        className="text-[0.9375rem] font-medium leading-[1.1] tracking-[0.025em] text-white antialiased sm:text-xl md:text-2xl"
-        style={brandSerif}
+        className="text-[0.9375rem] font-medium leading-[1.1] tracking-[0.12em] text-white antialiased sm:text-xl md:text-2xl"
+        style={{ fontFamily: "Cinzel, serif" }}
       >
         Vathy Frontier
       </span>
       <span
-        className="mt-0.5 text-[10px] font-medium italic tracking-[0.26em] text-[var(--gold-light)] sm:text-xs sm:tracking-[0.32em]"
-        style={brandSerif}
+        className="mt-0.5 text-[10px] font-medium tracking-[0.28em] text-[var(--gold-light)] sm:text-xs sm:tracking-[0.32em]"
+        style={{ fontFamily: "Cinzel, serif", fontOpticalSizing: "auto" }}
       >
         Holdings
       </span>
