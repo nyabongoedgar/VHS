@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="91mm" height="61mm" viewBox="0 0 91 61" role="img" aria-label="Vathy Frontier Holdings business card back">
+  <defs>
+    <style>
+      @font-face {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 600;
+        src: url("../public/fonts/montserrat-600.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Cinzel";
+        font-style: normal;
+        font-weight: 500;
+        src: url("../public/fonts/cinzel-500.woff2") format("woff2");
+      }
+    </style>
+  </defs>
+
+  <!-- Bleed background -->
+  <rect width="91" height="61" fill="#0a1628"/>
+
+  <!-- Name & title -->
+  <text
+    x="7"
+    y="12"
+    fill="#ffffff"
+    font-family="Cinzel"
+    font-size="3.5"
+    font-weight="500"
+    letter-spacing="0.2"
+  >Edgar Nyabongo T.</text>
+  <text
+    x="7"
+    y="16.8"
+    fill="#d4b98a"
+    font-family="Cinzel"
+    font-size="2.4"
+    font-weight="500"
+    letter-spacing="0.35"
+  >Principal</text>
+  <text
+    x="7"
+    y="20.8"
+    fill="#d4b98a"
+    font-family="Cinzel"
+    font-size="2"
+    font-weight="500"
+    letter-spacing="0.25"
+  >Vathy Frontier Holdings (U) LTD</text>
+
+  <!-- One-liner -->
+  <text
+    x="7"
+    y="26.5"
+    fill="#d4b98a"
+    font-family="Montserrat"
+    font-size="1.55"
+    font-weight="600"
+    letter-spacing="0.06"
+  >Precious Metals &#183; Global Trade &#183;</text>
+  <text
+    x="7"
+    y="29.2"
+    fill="#d4b98a"
+    font-family="Montserrat"
+    font-size="1.55"
+    font-weight="600"
+    letter-spacing="0.06"
+  >Real Estate &#183; Hospitality &amp; more</text>
+
+  <!-- Contact details -->
+  <text x="7" y="35" fill="#ffffff" font-family="Montserrat" font-size="1.7" font-weight="600" letter-spacing="0.03">+256 702 667 337</text>
+  <text x="7" y="38.5" fill="#ffffff" font-family="Montserrat" font-size="1.7" font-weight="600" letter-spacing="0.03">nyabongoedgar@gmail.com</text>
+  <text x="7" y="42" fill="#ffffff" font-family="Montserrat" font-size="1.7" font-weight="600" letter-spacing="0.03">Kampala, Uganda</text>
+  <text x="7" y="45.5" fill="#ffffff" font-family="Montserrat" font-size="1.7" font-weight="600" letter-spacing="0.03">vathy-holdings.vercel.app</text>
+
+  <!-- QR code patch -->
+  <g id="qr" transform="translate(58, 8)">
+    <rect width="26" height="26" fill="#ffffff" rx="0.6"/>
+    <!-- QR_CODE -->
+  </g>
+
+  <!-- QR label -->
+  <text
+    x="71"
+    y="37.5"
+    text-anchor="middle"
+    fill="#d4b98a"
+    font-family="Montserrat"
+    font-size="1.35"
+    font-weight="600"
+    letter-spacing="0.08"
+  >Scan to visit</text>
+  <text
+    x="71"
+    y="40"
+    text-anchor="middle"
+    fill="#d4b98a"
+    font-family="Montserrat"
+    font-size="1.35"
+    font-weight="600"
+    letter-spacing="0.08"
+  >our website</text>
+</svg>

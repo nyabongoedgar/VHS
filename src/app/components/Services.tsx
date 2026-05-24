@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { Package, Truck, FileCheck, HeadphonesIcon } from "lucide-react";
+import { holdingSectors } from "../data/sectors";
 
 export function Services() {
   const services = [
@@ -89,7 +90,7 @@ export function Services() {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl sm:text-5xl font-bold mb-6">Our Services</h1>
             <p className="text-xl text-gray-300">
-              Multi-dimensional trading solutions across diverse industries
+              Multi-dimensional trading solutions and diversified holding company interests
             </p>
           </div>
         </div>
@@ -178,31 +179,25 @@ export function Services() {
         </div>
       </section>
 
-      {/* Industries We Serve */}
+      {/* Business Sectors */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-              Industries We Serve
+              Business Sectors
             </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Beyond trade and supply, Vathy Frontier Holdings operates across these key sectors
+            </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {[
-              "Food & Beverage",
-              "Construction",
-              "Manufacturing",
-              "Retail",
-              "Hospitality",
-              "Mining",
-              "Agriculture",
-              "Export/Import",
-            ].map((industry, index) => (
+            {holdingSectors.map((sector, index) => (
               <div
                 key={index}
                 className="bg-slate-50 border border-slate-200 rounded-lg p-6 text-center hover:border-amber-600 hover:shadow-md transition-all"
               >
-                <p className="font-semibold text-slate-900">{industry}</p>
+                <p className="font-semibold text-slate-900">{sector.title}</p>
               </div>
             ))}
           </div>

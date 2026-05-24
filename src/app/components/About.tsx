@@ -1,4 +1,5 @@
 import { Target, Users, Lightbulb, CheckCircle } from "lucide-react";
+import { holdingSectors } from "../data/sectors";
 
 export function About() {
   const values = [
@@ -50,18 +51,19 @@ export function About() {
               </h2>
               <div className="space-y-4 text-gray-700 text-lg">
                 <p>
-                  Vathy Frontier Holdings (U) LTD is a dynamic, multi-dimensional enterprise based in Uganda,
-                  specializing in global trade and supply chain solutions across diverse industries.
+                  Vathy Frontier Holdings (U) LTD is a dynamic, diversified holding company based in Uganda,
+                  with interests spanning global trade, hospitality, real estate, education, floriculture,
+                  media, finance, recruitment, and community impact through our foundation.
                 </p>
                 <p>
-                  Our company was founded on the principle that Uganda's rich resources deserve access to
-                  global markets, and that international buyers deserve a reliable, professional partner
-                  in East Africa.
+                  Our company was founded on the principle that Uganda's rich resources and human potential
+                  deserve access to global markets, and that international partners deserve a reliable,
+                  professional partner in East Africa.
                 </p>
                 <p>
                   From precious metals to agricultural produce, from construction materials to specialty
-                  commodities like premium coffee, we handle it all with expertise, professionalism, and
-                  an unwavering commitment to quality.
+                  commodities like premium coffee, we handle trade with expertise and professionalism—while
+                  our broader sector portfolio reflects our vision as a true multi-dimensional enterprise.
                 </p>
               </div>
             </div>
@@ -83,8 +85,34 @@ export function About() {
         </div>
       </section>
 
-      {/* Core Values */}
+      {/* Business Sectors */}
       <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+              Our Business Sectors
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              A holding company with diversified interests across trade, services, and social impact
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {holdingSectors.map((sector, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow border border-slate-100"
+              >
+                <h3 className="text-lg font-semibold text-slate-900 mb-2">{sector.title}</h3>
+                <p className="text-gray-600 text-sm">{sector.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
@@ -113,7 +141,7 @@ export function About() {
       </section>
 
       {/* What Makes Us Different */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">

@@ -12,11 +12,57 @@ export function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/2b90ad00d41c5f4d4e6d59d77f4b7839", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          interest: formData.interest,
+          message: formData.message,
+          _subject: `New contact inquiry from ${formData.name}`,
+          _replyto: formData.email,
+          _template: "table",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error("Failed to send message");
+      }
+
+      setSubmitted(true);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        interest: "coffee",
+        message: "",
+      });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch {
+      setError(
+        "Something went wrong. Please try again or email us directly at nyabongoedgar@gmail.com."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -38,7 +84,7 @@ export function Contact() {
     {
       icon: <Phone size={24} />,
       title: "Phone",
-      details: "+256 XXX XXX XXX",
+      details: "+256702667337",
       subdetails: "Available 24/7",
     },
     {
@@ -104,6 +150,12 @@ export function Contact() {
             {submitted && (
               <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg">
                 Thank you for your message! We'll get back to you soon.
+              </div>
+            )}
+
+            {error && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg">
+                {error}
               </div>
             )}
 
@@ -190,6 +242,14 @@ export function Contact() {
                   <option value="precious-metals">Precious Metals</option>
                   <option value="agriculture">Agricultural Produce</option>
                   <option value="construction">Construction Materials</option>
+                  <option value="hospitality">Hospitality</option>
+                  <option value="real-estate">Real Estate</option>
+                  <option value="education">Education</option>
+                  <option value="floriculture">Floriculture</option>
+                  <option value="media-advertising">Media & Advertising</option>
+                  <option value="finance-insurance">Finance & Insurance</option>
+                  <option value="recruitment">Recruitment</option>
+                  <option value="foundation">Foundation</option>
                   <option value="general">General Inquiry</option>
                   <option value="other">Other</option>
                 </select>
@@ -214,10 +274,11 @@ export function Contact() {
               <div>
                 <button
                   type="submit"
-                  className="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="w-full bg-amber-600 hover:bg-amber-700 disabled:bg-amber-400 disabled:cursor-not-allowed text-white font-semibold py-4 px-6 rounded-lg transition-colors flex items-center justify-center gap-2"
                 >
                   <Send size={20} />
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
               </div>
 

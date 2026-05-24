@@ -142,8 +142,8 @@ export function Layout() {
                 <BrandWordmark />
               </div>
               <p className="text-gray-400 text-sm leading-relaxed">
-                A distinguished multi-dimensional enterprise delivering excellence across precious metals,
-                agriculture, construction, and global supply chains.
+                A diversified holding company delivering excellence across trade, hospitality,
+                real estate, education, floriculture, media, finance, recruitment, and community impact.
               </p>
             </div>
 
@@ -167,7 +167,7 @@ export function Layout() {
               <h3 className="font-medium mb-6 tracking-wide" style={{ color: 'var(--gold)' }}>Contact Information</h3>
               <ul className="space-y-3 text-gray-400 text-sm">
                 <li className="font-light">Email: info@vathyfrontier.com</li>
-                <li className="font-light">Phone: +256 XXX XXX XXX</li>
+                <li className="font-light">Phone: +256702667337</li>
                 <li className="font-light">Location: Kampala, Uganda</li>
               </ul>
             </div>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vathy Frontier Holdings — Business Card Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&family=Montserrat:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #0a1628;
+        --gold: #c5a572;
+        --gold-light: #d4b98a;
+        --bg: #1a1a2e;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: #fff;
+        font-family: Montserrat, sans-serif;
+        padding: 2rem;
+      }
+
+      h1 {
+        font-family: Cinzel, serif;
+        font-weight: 500;
+        font-size: 1.5rem;
+        letter-spacing: 0.08em;
+        margin: 0 0 0.5rem;
+      }
+
+      .subtitle {
+        color: var(--gold-light);
+        font-size: 0.85rem;
+        margin-bottom: 2rem;
+      }
+
+      .controls {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+        align-items: center;
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        color: #ccc;
+        cursor: pointer;
+      }
+
+      .cards {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .card-wrap {
+        text-align: center;
+      }
+
+      .card-wrap h2 {
+        font-family: Cinzel, serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--gold);
+        letter-spacing: 0.12em;
+        margin-bottom: 0.75rem;
+      }
+
+      .card {
+        background: var(--navy);
+        border: 1px solid rgba(197, 165, 114, 0.3);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+      }
+
+      .card img,
+      .card object {
+        display: block;
+        width: 340px;
+        height: auto;
+      }
+
+      .card.actual-size img,
+      .card.actual-size object {
+        width: 91mm;
+        height: 61mm;
+      }
+
+      .note {
+        margin-top: 2rem;
+        padding: 1rem 1.25rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-left: 3px solid var(--gold);
+        font-size: 0.8rem;
+        color: #aaa;
+        max-width: 720px;
+      }
+
+      .note code {
+        color: var(--gold-light);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Business Card Preview</h1>
+    <p class="subtitle">Vathy Frontier Holdings — Edgar Nyabongo T., Principal</p>
+
+    <div class="controls">
+      <label>
+        <input type="checkbox" id="actualSize" />
+        Show actual print size (91 × 61 mm with bleed)
+      </label>
+      <label>
+        <input type="checkbox" id="useExports" checked />
+        Use PNG exports (run <code>pnpm generate:card</code> first)
+      </label>
+    </div>
+
+    <div class="cards">
+      <div class="card-wrap">
+        <h2>Front</h2>
+        <div class="card" id="frontCard">
+          <img id="frontPng" src="export/front.png" alt="Business card front" />
+          <object id="frontSvg" data="front.svg" type="image/svg+xml" hidden></object>
+        </div>
+      </div>
+
+      <div class="card-wrap">
+        <h2>Back</h2>
+        <div class="card" id="backCard">
+          <img id="backPng" src="export/back.png" alt="Business card back" />
+          <object id="backSvg" data="back.svg" type="image/svg+xml" hidden></object>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      Print specs: 85 × 55 mm trim, 3 mm bleed, 300 DPI.
+      Export PNGs with <code>pnpm generate:card</code>.
+      QR links to <code>https://vathy-holdings.vercel.app/</code>
+    </div>
+
+    <script>
+      const actualSize = document.getElementById("actualSize");
+      const useExports = document.getElementById("useExports");
+      const frontCard = document.getElementById("frontCard");
+      const backCard = document.getElementById("backCard");
+      const frontPng = document.getElementById("frontPng");
+      const backPng = document.getElementById("backPng");
+      const frontSvg = document.getElementById("frontSvg");
+      const backSvg = document.getElementById("backSvg");
+
+      function updateView() {
+        const actual = actualSize.checked;
+        const exports = useExports.checked;
+
+        frontCard.classList.toggle("actual-size", actual);
+        backCard.classList.toggle("actual-size", actual);
+
+        frontPng.hidden = !exports;
+        backPng.hidden = !exports;
+        frontSvg.hidden = exports;
+        backSvg.hidden = exports;
+      }
+
+      actualSize.addEventListener("change", updateView);
+      useExports.addEventListener("change", updateView);
+      updateView();
+    </script>
+  </body>
+</html>

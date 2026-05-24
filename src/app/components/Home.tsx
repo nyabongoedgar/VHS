@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { ArrowRight, Globe, Shield, Award, CheckCircle2 } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { holdingSectors } from "../data/sectors";
 
 export function Home() {
   const services = [
@@ -115,7 +116,7 @@ export function Home() {
               </h2>
               <div className="w-16 h-0.5 mb-8" style={{ backgroundColor: 'var(--gold)' }}></div>
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                Vathy Frontier Holdings (U) LTD represents the intersection of Uganda's rich resources and global commerce. We specialize in precious metals, premium coffee, agricultural produce, and construction materials.
+                Vathy Frontier Holdings (U) LTD is a diversified holding company at the intersection of Uganda's rich resources and global commerce. Beyond precious metals, premium coffee, agricultural produce, and construction materials, we invest across hospitality, real estate, education, and more.
               </p>
               <p className="text-lg text-gray-700 leading-relaxed mb-8">
                 Our commitment to quality, reliability, and ethical business practices has established us as a trusted partner in international trade.
@@ -140,6 +141,44 @@ export function Home() {
               </div>
               <div className="absolute -bottom-8 -right-8 w-64 h-64 border-2 -z-10" style={{ borderColor: 'var(--gold)' }}></div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Business Sectors Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="mb-6">
+              <span className="text-sm tracking-[0.2em] uppercase" style={{ color: 'var(--gold)' }}>
+                Our Portfolio
+              </span>
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-light mb-6 leading-[1.2]" style={{ color: 'var(--navy-900)' }}>
+              Business <span className="font-medium italic">Sectors</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              A multi-sector holding company building value across trade, services, and community impact.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {holdingSectors.map((sector, index) => (
+              <div
+                key={index}
+                className="group border border-gray-100 bg-[#f8f9fa] p-8 transition-all hover:border-[var(--gold)] hover:shadow-lg"
+              >
+                <div className="w-10 h-10 mb-5 border flex items-center justify-center text-sm font-medium"
+                  style={{ borderColor: 'var(--gold)', color: 'var(--gold)' }}
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </div>
+                <h3 className="text-xl font-light mb-3" style={{ color: 'var(--navy-900)' }}>
+                  {sector.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{sector.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
