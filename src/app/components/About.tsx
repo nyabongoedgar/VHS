@@ -1,215 +1,124 @@
-import { Target, Users, Lightbulb, CheckCircle } from "lucide-react";
-import { holdingSectors } from "../data/sectors";
+import { Link as RouterLink } from "react-router";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import EmojiObjectsOutlinedIcon from "@mui/icons-material/EmojiObjectsOutlined";
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import GpsFixedOutlinedIcon from "@mui/icons-material/GpsFixedOutlined";
+import { Box, Button, Card, CardContent, Container, Grid, Paper, Stack, Typography } from "@mui/material";
+import { companyProfile, coreValues } from "../data/company";
+import { PageHero } from "./layout/PageHero";
+import { SectionHeading } from "./layout/SectionHeading";
+import { Timeline } from "./layout/Timeline";
+import { CtaSection } from "./layout/CtaSection";
+import { brand, surfaces } from "../../theme/premiumTheme";
+
+const valueIcons = [
+  <CheckCircleOutlineIcon />,
+  <GpsFixedOutlinedIcon />,
+  <GroupsOutlinedIcon />,
+  <EmojiObjectsOutlinedIcon />,
+];
+
+const differentiators = [
+  { title: "Multi-Sector Structure", text: "One holding company, nine portfolio sectors — from global trade and commodities to hospitality, real estate, education, and community impact." },
+  { title: "Local Knowledge, Global Standards", text: "Deep understanding of Uganda's markets combined with international best practices in trade, logistics, and enterprise management." },
+  { title: "Evidence Over Claims", text: "We present our portfolio clearly — named divisions, defined sectors, and a transparent timeline — so partners know exactly what we do." },
+  { title: "Built for Long-Term Partnerships", text: "We're not just about transactions. We build lasting relationships, understanding that your success is our success." },
+];
 
 export function About() {
-  const values = [
-    {
-      icon: <CheckCircle size={32} />,
-      title: "Integrity",
-      description: "We conduct all business with the highest ethical standards and transparency.",
-    },
-    {
-      icon: <Target size={32} />,
-      title: "Excellence",
-      description: "We strive for excellence in every transaction and relationship.",
-    },
-    {
-      icon: <Users size={32} />,
-      title: "Partnership",
-      description: "We build long-term relationships based on mutual trust and success.",
-    },
-    {
-      icon: <Lightbulb size={32} />,
-      title: "Innovation",
-      description: "We continuously adapt to meet the evolving needs of global trade.",
-    },
-  ];
-
   return (
-    <div>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 to-slate-800 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-              About Vathy Frontier Holdings
-            </h1>
-            <p className="text-xl text-gray-300">
-              Building bridges between Uganda and the world through reliable, multi-dimensional trade solutions
-            </p>
-          </div>
-        </div>
-      </section>
+    <Box>
+      <PageHero title="About Us" subtitle={companyProfile.tagline} />
 
-      {/* Company Story */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
-                Who We Are
-              </h2>
-              <div className="space-y-4 text-gray-700 text-lg">
-                <p>
-                  Vathy Frontier Holdings (U) LTD is a dynamic, diversified holding company based in Uganda,
-                  with interests spanning global trade, hospitality, real estate, education, floriculture,
-                  media, finance, recruitment, and community impact through our foundation.
-                </p>
-                <p>
-                  Our company was founded on the principle that Uganda's rich resources and human potential
-                  deserve access to global markets, and that international partners deserve a reliable,
-                  professional partner in East Africa.
-                </p>
-                <p>
-                  From precious metals to agricultural produce, from construction materials to specialty
-                  commodities like premium coffee, we handle trade with expertise and professionalism—while
-                  our broader sector portfolio reflects our vision as a true multi-dimensional enterprise.
-                </p>
-              </div>
-            </div>
+      <Box sx={{ py: { xs: 10, md: 12 }, bgcolor: surfaces.light }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={8} alignItems="flex-start">
+            <Grid size={{ xs: 12, lg: 7 }}>
+              <SectionHeading align="left" eyebrow="Our Identity" title="Who We Are" subtitle="" />
+              <Typography paragraph sx={{ color: "text.secondary", lineHeight: 1.85 }}>
+                {companyProfile.intro}
+              </Typography>
+              <Typography paragraph sx={{ color: "text.secondary", lineHeight: 1.85 }}>
+                {companyProfile.story}
+              </Typography>
+              <Typography sx={{ color: "text.secondary", lineHeight: 1.85 }}>
+                {companyProfile.motto}
+              </Typography>
+            </Grid>
+            <Grid size={{ xs: 12, lg: 5 }}>
+              <Paper elevation={0} sx={{ p: { xs: 4, md: 5 }, bgcolor: surfaces.deep, border: `1px solid ${brand.gold}40` }}>
+                <Typography variant="subtitle2" sx={{ color: brand.goldDark, mb: 1.5 }}>
+                  Purpose
+                </Typography>
+                <Typography variant="h5" sx={{ mb: 2, fontFamily: "Cinzel, serif", fontWeight: 500 }}>
+                  Our Mission
+                </Typography>
+                <Typography sx={{ color: "text.secondary", lineHeight: 1.85, mb: 5 }}>
+                  {companyProfile.mission}
+                </Typography>
+                <Typography variant="h5" sx={{ mb: 2, fontFamily: "Cinzel, serif", fontWeight: 500 }}>
+                  Our Vision
+                </Typography>
+                <Typography sx={{ color: "text.secondary", lineHeight: 1.85 }}>
+                  {companyProfile.vision}
+                </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
 
-            <div className="bg-slate-50 p-8 rounded-lg">
-              <h3 className="text-2xl font-semibold text-slate-900 mb-6">Our Mission</h3>
-              <p className="text-gray-700 text-lg mb-8">
-                To connect Uganda's finest products and resources to global markets through reliable,
-                efficient, and sustainable trade practices that benefit all stakeholders.
-              </p>
+      <Timeline />
 
-              <h3 className="text-2xl font-semibold text-slate-900 mb-6">Our Vision</h3>
-              <p className="text-gray-700 text-lg">
-                To become East Africa's most trusted multi-dimensional trading partner, recognized for
-                excellence, reliability, and our commitment to long-term partnerships.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Business Sectors */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-              Our Business Sectors
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              A holding company with diversified interests across trade, services, and social impact
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {holdingSectors.map((sector, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow border border-slate-100"
-              >
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">{sector.title}</h3>
-                <p className="text-gray-600 text-sm">{sector.description}</p>
-              </div>
+      <Box sx={{ py: { xs: 10, md: 12 }, bgcolor: surfaces.muted }}>
+        <Container maxWidth="lg">
+          <SectionHeading title="Our Core Values" subtitle="The principles that guide every decision we make" />
+          <Grid container spacing={3}>
+            {coreValues.map((value, i) => (
+              <Grid key={value.title} size={{ xs: 12, sm: 6, lg: 3 }}>
+                <Card sx={{ height: "100%" }}>
+                  <CardContent sx={{ textAlign: "center", p: 4 }}>
+                    <Box sx={{ width: 64, height: 64, border: `1px solid ${brand.gold}`, color: brand.goldDark, display: "inline-flex", alignItems: "center", justifyContent: "center", mb: 2.5, bgcolor: `${brand.gold}0a` }}>
+                      {valueIcons[i]}
+                    </Box>
+                    <Typography variant="h6" sx={{ mb: 1, fontFamily: "Cinzel, serif", fontWeight: 500 }}>
+                      {value.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.75 }}>
+                      {value.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
             ))}
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Box>
 
-      {/* Core Values */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-              Our Core Values
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              The principles that guide every decision we make
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow"
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-100 text-amber-600 rounded-full mb-4">
-                  {value.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
-              </div>
+      <Box sx={{ py: { xs: 10, md: 12 }, bgcolor: surfaces.light }}>
+        <Container maxWidth="md">
+          <SectionHeading title="What Makes Us Different" />
+          <Stack spacing={3}>
+            {differentiators.map((item) => (
+              <Paper key={item.title} elevation={0} sx={{ p: { xs: 3, md: 4 }, pl: { xs: 3, md: 5 }, borderLeft: `3px solid ${brand.gold}`, bgcolor: brand.paper }}>
+                <Typography variant="h6" sx={{ mb: 1, fontFamily: "Cinzel, serif", fontWeight: 500 }}>
+                  {item.title}
+                </Typography>
+                <Typography color="text.secondary" sx={{ lineHeight: 1.8 }}>
+                  {item.text}
+                </Typography>
+              </Paper>
             ))}
-          </div>
-        </div>
-      </section>
+          </Stack>
+          <Box sx={{ textAlign: "center", mt: 6 }}>
+            <Button component={RouterLink} to="/services" variant="contained" color="secondary">
+              Explore Our Portfolio
+            </Button>
+          </Box>
+        </Container>
+      </Box>
 
-      {/* What Makes Us Different */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">
-              What Makes Us Different
-            </h2>
-
-            <div className="space-y-6">
-              <div className="border-l-4 border-amber-600 pl-6 py-2">
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">
-                  Multi-Dimensional Expertise
-                </h3>
-                <p className="text-gray-700">
-                  Unlike specialized traders, we handle diverse commodities from precious metals to
-                  agricultural products, giving you a single, trusted partner for all your needs.
-                </p>
-              </div>
-
-              <div className="border-l-4 border-amber-600 pl-6 py-2">
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">
-                  Local Knowledge, Global Standards
-                </h3>
-                <p className="text-gray-700">
-                  We combine deep understanding of Uganda's markets and resources with international
-                  best practices in trade, logistics, and quality control.
-                </p>
-              </div>
-
-              <div className="border-l-4 border-amber-600 pl-6 py-2">
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">
-                  Relationship-Focused Approach
-                </h3>
-                <p className="text-gray-700">
-                  We're not just about transactions. We build lasting partnerships, understanding that
-                  your success is our success.
-                </p>
-              </div>
-
-              <div className="border-l-4 border-amber-600 pl-6 py-2">
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">
-                  Proven Track Record
-                </h3>
-                <p className="text-gray-700">
-                  Our growing portfolio of international clients, including major coffee importers in
-                  Europe, demonstrates our ability to deliver on promises.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="bg-gradient-to-r from-amber-600 to-amber-700 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Ready to Partner With Us?
-          </h2>
-          <p className="text-xl mb-8 text-amber-100 max-w-2xl mx-auto">
-            Discover how Vathy Frontier Holdings can support your business needs
-          </p>
-          <a
-            href="/contact"
-            className="inline-flex items-center justify-center px-8 py-3 bg-white text-amber-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            Contact Us Today
-          </a>
-        </div>
-      </section>
-    </div>
+      <CtaSection title="Ready to Partner With Us?" subtitle="Across trade, hospitality, real estate, or any of our sectors — we welcome the conversation." buttonText="Contact Us Today" />
+    </Box>
   );
 }

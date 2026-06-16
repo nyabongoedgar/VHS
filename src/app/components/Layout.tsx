@@ -1,185 +1,207 @@
-import { Outlet, Link, useLocation } from "react-router";
-import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { Link as RouterLink, Outlet, useLocation } from "react-router";
+import {
+  AppBar,
+  Box,
+  Button,
+  Container,
+  Divider,
+  Drawer,
+  IconButton,
+  Link,
+  List,
+  ListItemButton,
+  ListItemText,
+  Stack,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import { BrandLogo } from "./brand/BrandLogo";
+import { ScrollToTop } from "./layout/ScrollToTop";
+import { brand, surfaces } from "../../theme/premiumTheme";
+import { darkSectionLabelSx, onDark } from "../../theme/darkSurface";
 
-const brandMontserrat = {
-  fontFamily: "'Montserrat', sans-serif",
-  fontOpticalSizing: "auto" as const,
-};
-
-function BrandMonogram() {
-  return (
-    <div
-      className="flex size-11 shrink-0 items-center justify-center rounded-sm border-2 text-[11px] font-semibold leading-none tracking-[0.22em] text-[var(--gold)] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] sm:size-[52px] sm:text-sm sm:tracking-[0.18em]"
-      style={{ borderColor: "var(--gold)", ...brandMontserrat }}
-      aria-hidden
-    >
-      VFH
-    </div>
-  );
-}
-
-function BrandWordmark() {
-  return (
-    <div className="flex min-w-0 flex-col">
-      <span
-        className="text-[0.9375rem] font-medium leading-[1.1] tracking-[0.12em] text-white antialiased sm:text-xl md:text-2xl"
-        style={{ fontFamily: "Cinzel, serif" }}
-      >
-        Vathy Frontier
-      </span>
-      <span
-        className="mt-0.5 text-[10px] font-medium tracking-[0.28em] text-[var(--gold-light)] sm:text-xs sm:tracking-[0.32em]"
-        style={{ fontFamily: "Cinzel, serif", fontOpticalSizing: "auto" }}
-      >
-        Holdings
-      </span>
-    </div>
-  );
-}
+const navigation = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Services", path: "/services" },
+  { name: "Contact", path: "/contact" },
+];
 
 export function Layout() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
-  const navigation = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Coffee Supply", path: "/coffee-supply" },
-    { name: "Contact", path: "/contact" },
-  ];
-
   const isActive = (path: string) => {
-    if (path === "/") {
-      return location.pathname === "/";
-    }
+    if (path === "/") return location.pathname === "/";
     return location.pathname.startsWith(path);
   };
 
+  const navLinks = (
+    <>
+      {navigation.map((item) => (
+        <Button
+          key={item.path}
+          component={RouterLink}
+          to={item.path}
+          onClick={() => setMobileOpen(false)}
+          sx={{
+            color: isActive(item.path) ? brand.goldLight : onDark.muted,
+            fontWeight: isActive(item.path) ? 600 : 400,
+            letterSpacing: "0.1em",
+            fontSize: "0.75rem",
+            textTransform: "uppercase",
+            borderBottom: isActive(item.path) ? `1px solid ${brand.gold}` : "1px solid transparent",
+            borderRadius: 0,
+            px: 2,
+            py: 1,
+            minWidth: 0,
+            "&:hover": { color: brand.ivory, bgcolor: "transparent" },
+          }}
+        >
+          {item.name}
+        </Button>
+      ))}
+    </>
+  );
+
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      <header className="text-white sticky top-0 z-50 border-b backdrop-blur-sm" style={{
-        backgroundColor: 'rgba(10, 22, 40, 0.95)',
-        borderColor: 'rgba(197, 165, 114, 0.2)'
-      }}>
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            {/* Logo */}
-            <Link
-              to="/"
-              aria-label="Vathy Frontier Holdings, home"
-              className="group flex min-w-0 max-w-[min(100%,18rem)] items-center gap-2.5 rounded-sm outline-none ring-offset-2 ring-offset-[rgba(10,22,40,0.95)] transition-[opacity,transform] hover:opacity-95 active:scale-[0.99] focus-visible:ring-2 focus-visible:ring-[var(--gold)] sm:max-w-none sm:gap-3.5"
-            >
-              <BrandMonogram />
-              <BrandWordmark />
+    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <AppBar
+        position="sticky"
+        elevation={0}
+        sx={{
+          bgcolor: "rgba(20, 18, 16, 0.94)",
+          borderBottom: `1px solid rgba(197, 165, 114, 0.18)`,
+        }}
+      >
+        <Container maxWidth="lg">
+          <Toolbar disableGutters sx={{ minHeight: { xs: 72, md: 84 }, justifyContent: "space-between" }}>
+            <Link component={RouterLink} to="/" underline="none" aria-label="Vathy Frontier Holdings, home">
+              <BrandLogo />
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-1">
-              {navigation.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className={`px-5 py-2 text-sm font-light tracking-wide transition-all ${
-                    isActive(item.path)
-                      ? "text-white border-b-2"
-                      : "text-gray-300 hover:text-white"
-                  }`}
-                  style={isActive(item.path) ? { borderColor: 'var(--gold)' } : {}}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
+            <Stack direction="row" spacing={0.5} alignItems="center" sx={{ display: { xs: "none", md: "flex" } }}>
+              {navLinks}
+              <Button
+                component={RouterLink}
+                to="/contact"
+                variant="contained"
+                color="secondary"
+                size="small"
+                sx={{ ml: 2, py: 1, px: 2.5, fontSize: "0.75rem" }}
+              >
+                Enquire
+              </Button>
+            </Stack>
 
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden shrink-0 p-2 text-gray-300 hover:text-white"
-              style={{ color: mobileMenuOpen ? 'var(--gold)' : undefined }}
+            <IconButton
+              color="inherit"
+              sx={{ display: { md: "none" }, color: mobileOpen ? brand.goldLight : onDark.primary }}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+              {mobileOpen ? <CloseIcon /> : <MenuIcon />}
+            </IconButton>
+          </Toolbar>
+        </Container>
+      </AppBar>
 
-          {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <div className="md:hidden pb-4 border-t" style={{ borderColor: 'rgba(197, 165, 114, 0.2)' }}>
-              {navigation.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-4 py-3 text-base font-light transition-colors ${
-                    isActive(item.path)
-                      ? "text-white"
-                      : "text-gray-300 hover:text-white"
-                  }`}
-                  style={isActive(item.path) ? { color: 'var(--gold)' } : {}}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          )}
-        </nav>
-      </header>
+      <Drawer
+        anchor="right"
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        PaperProps={{ sx: { width: 300, bgcolor: brand.charcoal900, color: brand.ivory } }}
+      >
+        <Box sx={{ p: 2, display: "flex", justifyContent: "flex-end" }}>
+          <IconButton onClick={() => setMobileOpen(false)} sx={{ color: brand.ivory }}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <List>
+          {navigation.map((item) => (
+            <ListItemButton
+              key={item.path}
+              component={RouterLink}
+              to={item.path}
+              onClick={() => setMobileOpen(false)}
+              selected={isActive(item.path)}
+              sx={{
+                "&.Mui-selected": { bgcolor: "rgba(197, 165, 114, 0.12)", color: brand.goldLight },
+              }}
+            >
+              <ListItemText primary={item.name} />
+            </ListItemButton>
+          ))}
+          <ListItemButton component={RouterLink} to="/contact" onClick={() => setMobileOpen(false)}>
+            <ListItemText primary="Enquire" sx={{ color: brand.goldLight }} />
+          </ListItemButton>
+        </List>
+      </Drawer>
 
-      {/* Main Content */}
-      <main className="flex-grow">
+      <Box component="main" sx={{ flexGrow: 1 }}>
+        <ScrollToTop />
         <Outlet />
-      </main>
+      </Box>
 
-      {/* Footer */}
-      <footer className="text-white mt-auto" style={{ backgroundColor: 'var(--navy-900)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-            <div>
-              <div className="mb-6 flex items-center gap-2.5 sm:gap-3.5">
-                <BrandMonogram />
-                <BrandWordmark />
-              </div>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                A diversified holding company delivering excellence across trade, hospitality,
-                real estate, education, floriculture, media, finance, recruitment, and community impact.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-medium mb-6 tracking-wide" style={{ color: 'var(--gold)' }}>Quick Links</h3>
-              <ul className="space-y-3">
-                {navigation.map((item) => (
-                  <li key={item.path}>
-                    <Link
-                      to={item.path}
-                      className="text-gray-400 hover:text-white text-sm transition-colors font-light"
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-medium mb-6 tracking-wide" style={{ color: 'var(--gold)' }}>Contact Information</h3>
-              <ul className="space-y-3 text-gray-400 text-sm">
-                <li className="font-light">Email: info@vathyfrontier.com</li>
-                <li className="font-light">Phone: +256702667337</li>
-                <li className="font-light">Location: Kampala, Uganda</li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t pt-8 text-center text-gray-500 text-sm font-light"
-            style={{ borderColor: 'rgba(197, 165, 114, 0.2)' }}
+      <Box component="footer" sx={{ bgcolor: brand.charcoal900, color: brand.ivory, mt: "auto" }}>
+        <Box sx={{ height: 1, bgcolor: brand.gold, opacity: 0.4 }} />
+        <Container maxWidth="lg" sx={{ py: { xs: 7, md: 9 } }}>
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "1.5fr 1fr 1fr" },
+              gap: 6,
+              mb: 6,
+            }}
           >
-            <p>&copy; {new Date().getFullYear()} Vathy Frontier Holdings (U) LTD. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
+            <Box>
+              <BrandLogo compact />
+              <Typography sx={{ color: onDark.subtle, mt: 3, fontSize: "0.875rem", lineHeight: 1.85, maxWidth: 360 }}>
+                A diversified holding company delivering excellence across global trade, hospitality, real estate,
+                education, floriculture, media, finance, recruitment, and community impact.
+              </Typography>
+            </Box>
+
+            <Box>
+              <Typography variant="subtitle2" sx={{ ...darkSectionLabelSx, mb: 2.5 }}>
+                Navigation
+              </Typography>
+              <Stack spacing={1.5}>
+                {navigation.map((item) => (
+                  <Link
+                    key={item.path}
+                    component={RouterLink}
+                    to={item.path}
+                    underline="hover"
+                    sx={{ color: onDark.subtle, fontSize: "0.875rem", letterSpacing: "0.04em", "&:hover": { color: onDark.primary } }}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </Stack>
+            </Box>
+
+            <Box>
+              <Typography variant="subtitle2" sx={{ ...darkSectionLabelSx, mb: 2.5 }}>
+                Contact
+              </Typography>
+              <Stack spacing={1.5} sx={{ color: onDark.subtle, fontSize: "0.875rem" }}>
+                <Typography variant="body2">info@vathyfrontier.com</Typography>
+                <Typography variant="body2">+256 702 667 337</Typography>
+                <Typography variant="body2">Kampala, Uganda</Typography>
+              </Stack>
+            </Box>
+          </Box>
+
+          <Divider sx={{ borderColor: "rgba(197, 165, 114, 0.18)", mb: 3 }} />
+          <Typography variant="body2" sx={{ textAlign: "center", color: onDark.subtle, letterSpacing: "0.06em", fontSize: "0.8125rem" }}>
+            © {new Date().getFullYear()} Vathy Frontier Holdings (U) LTD. All rights reserved.
+          </Typography>
+        </Container>
+      </Box>
+    </Box>
   );
 }

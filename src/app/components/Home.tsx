@@ -1,303 +1,154 @@
-import { Link } from "react-router";
-import { ArrowRight, Globe, Shield, Award, CheckCircle2 } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { holdingSectors } from "../data/sectors";
+import { Link as RouterLink } from "react-router";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import PublicIcon from "@mui/icons-material/Public";
+import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
+import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
+import { Box, Button, Container, Divider, Grid, Paper, Stack, Typography } from "@mui/material";
+import { companyProfile, coreValues } from "../data/company";
+import { featuredSectorIds, getSectorById, holdingSectors } from "../data/sectors";
+import { HomeHero } from "./layout/HomeHero";
+import { SectionHeading } from "./layout/SectionHeading";
+import { SectorCard } from "./layout/SectorCard";
+import { SectorShowcase } from "./layout/SectorShowcase";
+import { StatsBar } from "./layout/StatsBar";
+import { Timeline } from "./layout/Timeline";
+import { CtaSection } from "./layout/CtaSection";
+import { brand, surfaces } from "../../theme/premiumTheme";
+
+const featuredSectors = featuredSectorIds.map((id) => getSectorById(id)!);
 
 export function Home() {
-  const services = [
-    {
-      title: "Coffee Supply",
-      description: "Premium coffee beans sourced and exported worldwide, including to Europe.",
-      link: "/coffee-supply",
-    },
-    {
-      title: "Precious Metals",
-      description: "Trading and supply of gold, silver, and other precious metals.",
-      link: "/services",
-    },
-    {
-      title: "Agriculture Produce",
-      description: "Quality agricultural products from Uganda's fertile lands.",
-      link: "/services",
-    },
-    {
-      title: "Construction Materials",
-      description: "Building materials and construction supplies for all project scales.",
-      link: "/services",
-    },
-  ];
-
-  const stats = [
-    { value: "100+", label: "Global Partners" },
-    { value: "15+", label: "Countries Served" },
-    { value: "99%", label: "Client Satisfaction" },
-  ];
-
   return (
-    <div>
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center" style={{ backgroundColor: 'var(--navy-900)' }}>
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-transparent z-10"></div>
-          <ImageWithFallback
-            src="https://images.unsplash.com/photo-1606185540834-d6e7483ee1a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnbG9iYWwlMjB0cmFkZSUyMHNoaXBwaW5nJTIwY29udGFpbmVycyUyMHBvcnR8ZW58MXx8fHwxNzc4NzYzNTE4fDA&ixlib=rb-4.1.0&q=80&w=1080"
-            alt="Global trade and shipping"
-            className="w-full h-full object-cover opacity-40"
+    <Box>
+      <HomeHero />
+      <StatsBar />
+
+      <Box sx={{ py: { xs: 10, md: 14 }, bgcolor: surfaces.light }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={8} alignItems="center">
+            <Grid size={{ xs: 12, lg: 6 }}>
+              <SectionHeading align="left" eyebrow="Who We Are" title="A Multi-Sector Holding Company" subtitle="" />
+              <Typography sx={{ color: "text.secondary", lineHeight: 1.85, mb: 2.5 }}>
+                {companyProfile.intro}
+              </Typography>
+              <Typography sx={{ color: "text.secondary", lineHeight: 1.85, mb: 4 }}>
+                {companyProfile.story}
+              </Typography>
+              <Button component={RouterLink} to="/about" endIcon={<ArrowForwardIcon />} sx={{ color: brand.goldDark, letterSpacing: "0.08em" }}>
+                Our Story
+              </Button>
+            </Grid>
+            <Grid size={{ xs: 12, lg: 6 }}>
+              <Paper elevation={0} sx={{ p: { xs: 4, md: 5 }, bgcolor: surfaces.deep, border: `1px solid ${brand.gold}40` }}>
+                <Typography variant="subtitle2" sx={{ color: brand.goldDark, mb: 1.5 }}>
+                  Purpose
+                </Typography>
+                <Typography variant="h6" sx={{ mb: 1.5, fontFamily: "Cinzel, serif", fontWeight: 500, color: brand.ink }}>
+                  Mission
+                </Typography>
+                <Typography sx={{ color: brand.slate, lineHeight: 1.85, mb: 4, fontSize: "0.9375rem" }}>
+                  {companyProfile.mission}
+                </Typography>
+                <Typography variant="h6" sx={{ mb: 1.5, fontFamily: "Cinzel, serif", fontWeight: 500, color: brand.ink }}>
+                  Vision
+                </Typography>
+                <Typography sx={{ color: brand.slate, lineHeight: 1.85, fontSize: "0.9375rem" }}>
+                  {companyProfile.vision}
+                </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      <Timeline />
+
+      <Box sx={{ py: { xs: 10, md: 14 }, bgcolor: surfaces.light }}>
+        <Container maxWidth="lg">
+          <SectionHeading
+            eyebrow="Our Portfolio"
+            title="Featured Sectors"
+            subtitle="A closer look at the divisions driving our group — from global trade to hospitality, real estate, and finance."
           />
-        </div>
+          {featuredSectors.map((sector, index) => (
+            <SectorShowcase key={sector.id} sector={sector} index={index} showFullDescription={false} />
+          ))}
+        </Container>
+      </Box>
 
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full">
-          <div className="max-w-4xl">
-            <div className="inline-block mb-6">
-              <span className="text-sm tracking-[0.2em] uppercase" style={{ color: 'var(--gold)' }}>
-                Est. 2024
-              </span>
-            </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light text-white mb-8 leading-[1.1]">
-              Vathy Frontier <br />
-              <span className="font-medium italic">Holdings</span>
-            </h1>
-            <div className="w-24 h-0.5 mb-8" style={{ backgroundColor: 'var(--gold)' }}></div>
-            <p className="text-xl sm:text-2xl text-gray-300 mb-12 max-w-2xl leading-relaxed">
-              A distinguished multi-dimensional enterprise connecting Uganda's finest resources to global markets with uncompromising excellence.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                to="/coffee-supply"
-                className="inline-flex items-center justify-center px-8 py-4 text-white font-medium transition-all border-2 hover:shadow-lg"
-                style={{
-                  backgroundColor: 'var(--gold)',
-                  borderColor: 'var(--gold)',
-                }}
-              >
-                Explore Coffee Export
-                <ArrowRight className="ml-2" size={20} />
-              </Link>
-              <Link
-                to="/services"
-                className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white font-medium hover:bg-white hover:text-[var(--navy-900)] transition-all"
-              >
-                Our Services
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Bar */}
-      <section className="py-16" style={{ backgroundColor: 'var(--navy-800)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-5xl font-light text-white mb-3" style={{ color: 'var(--gold)' }}>
-                  {stat.value}
-                </div>
-                <div className="text-sm tracking-wider uppercase text-gray-400">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Introduction Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="mb-6">
-                <span className="text-sm tracking-[0.2em] uppercase" style={{ color: 'var(--gold)' }}>
-                  Who We Are
-                </span>
-              </div>
-              <h2 className="text-4xl sm:text-5xl font-light mb-6 leading-[1.2]" style={{ color: 'var(--navy-900)' }}>
-                Excellence in <br />
-                <span className="font-medium italic">Global Trade</span>
-              </h2>
-              <div className="w-16 h-0.5 mb-8" style={{ backgroundColor: 'var(--gold)' }}></div>
-              <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                Vathy Frontier Holdings (U) LTD is a diversified holding company at the intersection of Uganda's rich resources and global commerce. Beyond precious metals, premium coffee, agricultural produce, and construction materials, we invest across hospitality, real estate, education, and more.
-              </p>
-              <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                Our commitment to quality, reliability, and ethical business practices has established us as a trusted partner in international trade.
-              </p>
-              <Link
-                to="/about"
-                className="inline-flex items-center text-base font-medium"
-                style={{ color: 'var(--gold)' }}
-              >
-                Learn More About Us
-                <ArrowRight className="ml-2" size={18} />
-              </Link>
-            </div>
-
-            <div className="relative">
-              <div className="aspect-[4/5] bg-gray-100 overflow-hidden">
-                <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1560493676-04071c5f467b"
-                  alt="Agriculture"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-8 -right-8 w-64 h-64 border-2 -z-10" style={{ borderColor: 'var(--gold)' }}></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Business Sectors Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="mb-6">
-              <span className="text-sm tracking-[0.2em] uppercase" style={{ color: 'var(--gold)' }}>
-                Our Portfolio
-              </span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-light mb-6 leading-[1.2]" style={{ color: 'var(--navy-900)' }}>
-              Business <span className="font-medium italic">Sectors</span>
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              A multi-sector holding company building value across trade, services, and community impact.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <Box sx={{ py: { xs: 10, md: 12 }, bgcolor: surfaces.muted }}>
+        <Container maxWidth="lg">
+          <SectionHeading eyebrow="Full Portfolio" title="All Sectors" subtitle="Nine portfolio sectors united by a single commitment to excellence" />
+          <Grid container spacing={3}>
             {holdingSectors.map((sector, index) => (
-              <div
-                key={index}
-                className="group border border-gray-100 bg-[#f8f9fa] p-8 transition-all hover:border-[var(--gold)] hover:shadow-lg"
-              >
-                <div className="w-10 h-10 mb-5 border flex items-center justify-center text-sm font-medium"
-                  style={{ borderColor: 'var(--gold)', color: 'var(--gold)' }}
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </div>
-                <h3 className="text-xl font-light mb-3" style={{ color: 'var(--navy-900)' }}>
-                  {sector.title}
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{sector.description}</p>
-              </div>
+              <Grid key={sector.id} size={{ xs: 12, sm: 6, lg: 4 }}>
+                <SectorCard index={index} title={sector.title} summary={sector.summary} icon={sector.icon} />
+              </Grid>
             ))}
-          </div>
-        </div>
-      </section>
+          </Grid>
+          <Box sx={{ textAlign: "center", mt: 5 }}>
+            <Button component={RouterLink} to="/services" variant="contained" color="secondary" endIcon={<ArrowForwardIcon />}>
+              View Full Portfolio
+            </Button>
+          </Box>
+        </Container>
+      </Box>
 
-      {/* Services Section */}
-      <section className="py-24" style={{ backgroundColor: '#f8f9fa' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="mb-6">
-              <span className="text-sm tracking-[0.2em] uppercase" style={{ color: 'var(--gold)' }}>
-                What We Offer
-              </span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-light mb-6 leading-[1.2]" style={{ color: 'var(--navy-900)' }}>
-              Our <span className="font-medium italic">Services</span>
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {services.map((service, index) => (
-              <Link
-                key={index}
-                to={service.link}
-                className="group bg-white p-10 transition-all hover:shadow-2xl border border-gray-100"
-              >
-                <div className="flex items-start justify-between mb-6">
-                  <div className="w-12 h-12 flex items-center justify-center border transition-colors"
-                    style={{ borderColor: 'var(--gold)', color: 'var(--gold)' }}
-                  >
-                    <CheckCircle2 size={24} />
-                  </div>
-                  <ArrowRight className="text-gray-400 group-hover:translate-x-1 transition-transform" size={20} />
-                </div>
-                <h3 className="text-2xl font-light mb-4" style={{ color: 'var(--navy-900)' }}>
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">{service.description}</p>
-              </Link>
+      <Box sx={{ py: { xs: 10, md: 14 }, bgcolor: surfaces.light }}>
+        <Container maxWidth="lg">
+          <SectionHeading eyebrow="Our Culture" title="Core Values" />
+          <Grid container spacing={3}>
+            {coreValues.map((value) => (
+              <Grid key={value.title} size={{ xs: 12, sm: 6, lg: 3 }}>
+                <Paper elevation={0} sx={{ p: 3.5, height: "100%", bgcolor: brand.paper, border: `1px solid ${brand.gold}33` }}>
+                  <Typography variant="h6" sx={{ mb: 1.5, fontFamily: "Cinzel, serif", fontWeight: 500 }}>
+                    {value.title}
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: brand.slate, lineHeight: 1.75 }}>
+                    {value.description}
+                  </Typography>
+                </Paper>
+              </Grid>
             ))}
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Box>
 
-      {/* Why Choose Us Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="mb-6">
-              <span className="text-sm tracking-[0.2em] uppercase" style={{ color: 'var(--gold)' }}>
-                Our Commitment
-              </span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl font-light mb-6 leading-[1.2]" style={{ color: 'var(--navy-900)' }}>
-              Why Choose <span className="font-medium italic">Vathy Frontier</span>
-            </h2>
-          </div>
+      <Box sx={{ py: { xs: 10, md: 14 }, bgcolor: surfaces.muted }}>
+        <Container maxWidth="lg">
+          <SectionHeading eyebrow="Our Commitment" title="Why Vathy Frontier" />
+          <Grid container spacing={4}>
+            {[
+              { icon: <PublicIcon sx={{ fontSize: 28 }} />, title: "Global Reach", text: "Connecting Uganda's resources and enterprises to international markets." },
+              { icon: <ShieldOutlinedIcon sx={{ fontSize: 28 }} />, title: "Integrity First", text: "Transparent operations and ethical practices across every sector we operate in." },
+              { icon: <WorkspacePremiumOutlinedIcon sx={{ fontSize: 28 }} />, title: "Long-Term Value", text: "Building partnerships and investments designed to last, not quick transactions." },
+            ].map((item, i) => (
+              <Grid key={item.title} size={{ xs: 12, md: 4 }}>
+                <Box sx={{ textAlign: "center", px: 3, position: "relative" }}>
+                  {i > 0 && (
+                    <Divider orientation="vertical" sx={{ position: "absolute", left: 0, top: "10%", height: "80%", borderColor: `${brand.gold}44`, display: { xs: "none", md: "block" } }} />
+                  )}
+                  <Box sx={{ width: 72, height: 72, border: `1px solid ${brand.gold}`, color: brand.goldDark, display: "inline-flex", alignItems: "center", justifyContent: "center", mb: 3, bgcolor: `${brand.gold}0a` }}>
+                    {item.icon}
+                  </Box>
+                  <Typography variant="h6" sx={{ mb: 1.5, fontFamily: "Cinzel, serif", fontWeight: 500 }}>
+                    {item.title}
+                  </Typography>
+                  <Typography color="text.secondary" sx={{ lineHeight: 1.8 }}>
+                    {item.text}
+                  </Typography>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 border-2 mb-6"
-                style={{ borderColor: 'var(--gold)', color: 'var(--gold)' }}
-              >
-                <Globe size={32} />
-              </div>
-              <h3 className="text-xl font-medium mb-3" style={{ color: 'var(--navy-900)' }}>Global Reach</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Established trade networks spanning multiple continents, connecting markets seamlessly.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 border-2 mb-6"
-                style={{ borderColor: 'var(--gold)', color: 'var(--gold)' }}
-              >
-                <Shield size={32} />
-              </div>
-              <h3 className="text-xl font-medium mb-3" style={{ color: 'var(--navy-900)' }}>Unwavering Reliability</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Trusted partner for timely and secure deliveries with full transparency.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 border-2 mb-6"
-                style={{ borderColor: 'var(--gold)', color: 'var(--gold)' }}
-              >
-                <Award size={32} />
-              </div>
-              <h3 className="text-xl font-medium mb-3" style={{ color: 'var(--navy-900)' }}>Premium Quality</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Rigorous quality standards ensuring excellence in every product we handle.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20" style={{ backgroundColor: 'var(--navy-900)' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl sm:text-5xl font-light text-white mb-6 leading-[1.2]">
-            Ready to <span className="font-medium italic">Partner</span> With Us?
-          </h2>
-          <p className="text-xl text-gray-300 mb-10 leading-relaxed">
-            Discover how Vathy Frontier Holdings can elevate your business with premium trade solutions.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center justify-center px-10 py-4 text-white font-medium transition-all border-2 hover:shadow-lg"
-            style={{
-              backgroundColor: 'var(--gold)',
-              borderColor: 'var(--gold)',
-            }}
-          >
-            Contact Us Today
-            <ArrowRight className="ml-2" size={20} />
-          </Link>
-        </div>
-      </section>
-    </div>
+      <CtaSection
+        title="Ready to Partner With Us?"
+        subtitle="Across trade, hospitality, real estate, finance, or any of our nine portfolio sectors — our team welcomes the conversation."
+        buttonText="Contact Us Today"
+      />
+    </Box>
   );
 }
