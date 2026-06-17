@@ -37,7 +37,7 @@ export function PageHero({
         display: "flex",
         alignItems: "center",
         overflow: "hidden",
-        bgcolor: brand.charcoal900,
+        bgcolor: brand.espresso900,
         color: brand.ivory,
         py: { xs: 8, md: 10 },
       }}

@@ -130,7 +130,7 @@ export const holdingSectors: HoldingSector[] = [
     summary: "Financial services and insurance solutions that protect and grow our partners' interests.",
     description:
       "We provide financial services and insurance solutions designed to protect assets, manage risk, and support growth — giving our partners and communities the confidence to invest and expand.",
-    image: "https://images.unsplash.com/photo-1554224311-0a1a5880ce38?w=1080",
+    image: "/images/finance-insurance.jpg",
     icon: "finance",
     highlights: ["Financial services", "Insurance and risk management", "Investment support", "Partner asset protection"],
   },

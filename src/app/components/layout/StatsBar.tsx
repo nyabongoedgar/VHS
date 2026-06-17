@@ -5,7 +5,14 @@ import { darkEyebrowSx, onDark } from "../../../theme/darkSurface";
 
 export function StatsBar() {
   return (
-    <Box sx={{ py: { xs: 6, md: 8 }, bgcolor: brand.charcoal800, borderTop: `1px solid ${brand.gold}33`, borderBottom: `1px solid ${brand.gold}33` }}>
+    <Box
+      sx={{
+        py: { xs: 6, md: 8 },
+        background: `linear-gradient(90deg, ${brand.espresso800} 0%, ${brand.espresso900} 50%, ${brand.espresso800} 100%)`,
+        borderTop: `1px solid ${brand.gold}40`,
+        borderBottom: `1px solid ${brand.gold}40`,
+      }}
+    >
       <Container maxWidth="lg">
         <Grid container spacing={0} alignItems="center">
           {companyStats.map((stat, i) => (

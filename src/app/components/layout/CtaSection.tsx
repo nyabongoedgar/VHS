@@ -15,7 +15,7 @@ export function CtaSection({ title, subtitle, buttonText, buttonTo = "/contact" 
     <Box
       sx={{
         py: { xs: 10, md: 12 },
-        bgcolor: brand.charcoal900,
+        background: `linear-gradient(165deg, ${brand.espresso800} 0%, ${brand.espresso900} 50%, #35302b 100%)`,
         color: brand.ivory,
         position: "relative",
         overflow: "hidden",

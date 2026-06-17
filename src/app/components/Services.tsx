@@ -72,7 +72,7 @@ export function Services() {
         </Container>
       </Box>
 
-      <Box sx={{ py: { xs: 10, md: 12 }, bgcolor: brand.charcoal900, color: brand.ivory, textAlign: "center", position: "relative" }}>
+      <Box sx={{ py: { xs: 10, md: 12 }, background: `linear-gradient(165deg, ${brand.espresso800}, ${brand.espresso900})`, color: brand.ivory, textAlign: "center", position: "relative" }}>
         <Box sx={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, bgcolor: brand.gold, opacity: 0.5 }} />
         <Container maxWidth="md">
           <HeadsetMicOutlinedIcon sx={{ fontSize: 44, color: onDark.stat, mb: 2 }} />

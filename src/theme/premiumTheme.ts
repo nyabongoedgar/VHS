@@ -1,10 +1,14 @@
 import { createTheme, alpha } from "@mui/material/styles";
 
-/** Warm charcoal + gold — no cold navy, no bright white */
+/**
+ * Warm espresso + gold — inviting dark accents, never flat black.
+ * Navigation uses light surfaces; espresso is for heroes, CTAs, and footer depth.
+ */
 export const brand = {
-  charcoal900: "#141210",
-  charcoal800: "#1e1b18",
-  charcoal700: "#2c2824",
+  espresso900: "#3d3832",
+  espresso800: "#4a4540",
+  espresso700: "#5c5650",
+  espresso600: "#6e6760",
   gold: "#c5a572",
   goldLight: "#d4b98a",
   goldDark: "#a68b5b",
@@ -12,14 +16,20 @@ export const brand = {
   cream: "#e5e0d6",
   creamDark: "#d9d3c8",
   paper: "#f7f4ee",
-  ink: "#1a1714",
+  ink: "#2a2622",
   slate: "#6b6560",
-  /** @deprecated use charcoal900 */
-  navy900: "#141210",
-  /** @deprecated use charcoal800 */
-  navy800: "#1e1b18",
-  /** @deprecated use charcoal700 */
-  navy700: "#2c2824",
+  /** @deprecated — use espresso900 */
+  charcoal900: "#3d3832",
+  /** @deprecated — use espresso800 */
+  charcoal800: "#4a4540",
+  /** @deprecated — use espresso700 */
+  charcoal700: "#5c5650",
+  /** @deprecated — use espresso900 */
+  navy900: "#3d3832",
+  /** @deprecated — use espresso800 */
+  navy800: "#4a4540",
+  /** @deprecated — use espresso700 */
+  navy700: "#5c5650",
 };
 
 export const surfaces = {
@@ -27,17 +37,18 @@ export const surfaces = {
   muted: brand.cream,
   deep: brand.creamDark,
   paper: brand.paper,
-  dark: brand.charcoal900,
-  darkMuted: brand.charcoal800,
+  dark: brand.espresso900,
+  darkMuted: brand.espresso800,
+  nav: alpha(brand.paper, 0.88),
 };
 
 export const premiumTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: brand.charcoal900,
-      light: brand.charcoal700,
-      dark: "#0c0a09",
+      main: brand.espresso900,
+      light: brand.espresso700,
+      dark: "#2f2b27",
       contrastText: brand.ivory,
     },
     secondary: {
@@ -87,7 +98,7 @@ export const premiumTheme = createTheme({
     h6: { fontWeight: 600, color: brand.ink },
     subtitle1: { letterSpacing: "0.06em", fontWeight: 500 },
     subtitle2: {
-      letterSpacing: "0.18em",
+      letterSpacing: "0.16em",
       textTransform: "uppercase",
       fontSize: "0.6875rem",
       fontWeight: 600,
@@ -95,7 +106,7 @@ export const premiumTheme = createTheme({
     button: {
       textTransform: "none",
       fontWeight: 600,
-      letterSpacing: "0.06em",
+      letterSpacing: "0.05em",
     },
   },
   shape: { borderRadius: 2 },
@@ -116,8 +127,8 @@ export const premiumTheme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 0,
-          padding: "14px 32px",
-          transition: "all 0.3s ease",
+          padding: "12px 28px",
+          transition: "all 0.25s ease",
         },
         containedSecondary: {
           color: brand.ink,
@@ -138,7 +149,7 @@ export const premiumTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundImage: "none",
-          backdropFilter: "blur(16px)",
+          backdropFilter: "blur(20px) saturate(1.2)",
         },
       },
     },
@@ -147,13 +158,13 @@ export const premiumTheme = createTheme({
         root: {
           borderRadius: 0,
           backgroundColor: brand.paper,
-          border: `1px solid ${alpha(brand.gold, 0.25)}`,
+          border: `1px solid ${alpha(brand.gold, 0.22)}`,
           boxShadow: "none",
           transition: "box-shadow 0.35s ease, border-color 0.35s ease, transform 0.35s ease",
           "&:hover": {
-            boxShadow: `0 16px 48px ${alpha(brand.charcoal900, 0.12)}`,
-            borderColor: alpha(brand.gold, 0.55),
-            transform: "translateY(-3px)",
+            boxShadow: `0 12px 40px ${alpha(brand.espresso900, 0.08)}`,
+            borderColor: alpha(brand.gold, 0.5),
+            transform: "translateY(-2px)",
           },
         },
       },

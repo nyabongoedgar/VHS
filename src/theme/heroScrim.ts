@@ -1,6 +1,6 @@
 import { brand } from "./premiumTheme";
 
-const scrimBase = "14, 12, 10";
+const scrimBase = "61, 56, 50";
 
 /** Left-weighted scrim — text on left, photo visible on right */
 export const heroScrimLeft = `linear-gradient(
