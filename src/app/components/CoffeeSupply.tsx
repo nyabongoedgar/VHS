@@ -17,6 +17,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { siteImages } from "../data/images";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { PageHero } from "./layout/PageHero";
 import { SectionHeading } from "./layout/SectionHeading";
@@ -29,13 +30,13 @@ const coffeeTypes = [
     name: "Arabica",
     description: "Premium quality Arabica beans from high-altitude regions of Uganda",
     characteristics: ["Smooth flavor", "Low acidity", "Complex aroma", "Specialty grade"],
-    image: "https://images.unsplash.com/photo-1447933601403-0c6688de566e",
+    image: siteImages.coffee.arabica,
   },
   {
     name: "Robusta",
     description: "Bold, strong Robusta beans known for their rich body and crema",
     characteristics: ["Strong body", "High caffeine", "Chocolatey notes", "Excellent crema"],
-    image: "https://images.unsplash.com/photo-1675306408031-a9aad9f23308",
+    image: siteImages.coffee.robusta,
   },
 ];
 
@@ -70,7 +71,7 @@ export function CoffeeSupply() {
       <PageHero
         title="Coffee Supply & Export"
         subtitle="One of our four global trade divisions — specialty beans sourced from certified Ugandan farms and exported to international markets"
-        image="https://images.unsplash.com/photo-1513530176992-0cf39c4cbed4"
+        image={siteImages.coffee.hero}
         align="left"
       >
         <Button

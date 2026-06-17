@@ -6,7 +6,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "generate:card": "node business-card/scripts/generate-card.mjs"
+    "generate:card": "node business-card/scripts/generate-card.mjs",
+    "download:images": "node scripts/download-site-images.mjs"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",

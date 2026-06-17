@@ -2,13 +2,12 @@ import { Link as RouterLink } from "react-router";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { companyProfile } from "../../data/company";
+import { siteImages } from "../../data/images";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { brand, surfaces } from "../../../theme/premiumTheme";
 import { heroGoldBottomLine, heroGoldTopLine } from "../../../theme/heroScrim";
 
-/** Warm vintage world map — global presence */
-const HOME_HERO_IMAGE =
-  "https://images.unsplash.com/photo-1524661135-423995f22d0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1200";
+const HOME_HERO_IMAGE = siteImages.homeHero;
 
 export function HomeHero() {
   return (
