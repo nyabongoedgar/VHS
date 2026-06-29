@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 import { brand } from "../../../theme/premiumTheme";
 
 type BrandLogoProps = {
@@ -7,7 +8,7 @@ type BrandLogoProps = {
   light?: boolean;
 };
 
-export function BrandMonogram({ size = 52 }: { size?: number }) {
+export function BrandMonogram({ size = 52, light = false }: { size?: number; light?: boolean }) {
   return (
     <Box
       aria-hidden
@@ -20,12 +21,12 @@ export function BrandMonogram({ size = 52 }: { size?: number }) {
         justifyContent: "center",
         border: `2px solid ${brand.gold}`,
         borderRadius: 0.5,
-        color: brand.goldDark,
+        color: light ? brand.goldLight : brand.goldDark,
         fontFamily: "Montserrat, sans-serif",
         fontWeight: 600,
         fontSize: size > 44 ? "0.875rem" : "0.6875rem",
         letterSpacing: "0.2em",
-        bgcolor: "rgba(197, 165, 114, 0.06)",
+        bgcolor: light ? alpha(brand.ocean600, 0.18) : "rgba(197, 165, 114, 0.06)",
       }}
     >
       VFH
@@ -39,7 +40,7 @@ export function BrandLogo({ compact = false, light = false }: BrandLogoProps) {
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: compact ? 1.5 : 2, minWidth: 0 }}>
-      <BrandMonogram size={compact ? 44 : 48} />
+      <BrandMonogram size={compact ? 44 : 48} light={light} />
       <Box sx={{ minWidth: 0 }}>
         <Typography
           sx={{

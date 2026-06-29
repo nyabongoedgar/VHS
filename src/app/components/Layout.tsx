@@ -20,7 +20,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { BrandLogo } from "./brand/BrandLogo";
 import { ScrollToTop } from "./layout/ScrollToTop";
-import { brand, surfaces } from "../../theme/premiumTheme";
+import { alpha } from "@mui/material/styles";
+import { brand } from "../../theme/premiumTheme";
 
 const navigation = [
   { name: "Home", path: "/" },
@@ -52,17 +53,24 @@ export function Layout() {
         position="sticky"
         elevation={0}
         sx={{
-          bgcolor: scrolled ? "rgba(247, 244, 238, 0.94)" : "rgba(247, 244, 238, 0.78)",
-          borderBottom: `1px solid rgba(197, 165, 114, ${scrolled ? 0.35 : 0.22})`,
-          boxShadow: scrolled ? "0 8px 32px rgba(61, 56, 50, 0.07)" : "none",
+          bgcolor: scrolled ? brand.ocean900 : brand.ocean800,
+          borderBottom: `1px solid ${alpha(brand.gold, scrolled ? 0.4 : 0.28)}`,
+          boxShadow: scrolled ? `0 8px 32px ${alpha(brand.ocean900, 0.45)}` : "none",
           transition: "background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
         }}
       >
-        <Box sx={{ height: 2, bgcolor: brand.gold, opacity: scrolled ? 0.85 : 0.55, transition: "opacity 0.3s ease" }} />
+        <Box
+          sx={{
+            height: 3,
+            background: `linear-gradient(90deg, ${brand.ocean600} 0%, ${brand.ocean700} 40%, ${brand.gold} 100%)`,
+            opacity: scrolled ? 1 : 0.88,
+            transition: "opacity 0.3s ease",
+          }}
+        />
         <Container maxWidth="lg">
           <Toolbar disableGutters sx={{ minHeight: { xs: 68, md: 76 }, justifyContent: "space-between", gap: 2 }}>
             <Link component={RouterLink} to="/" underline="none" aria-label="Vathy Frontier Holdings, home" sx={{ py: 1 }}>
-              <BrandLogo light={false} />
+              <BrandLogo light />
             </Link>
 
             <Stack direction="row" spacing={0.25} alignItems="center" sx={{ display: { xs: "none", md: "flex" } }}>
@@ -74,7 +82,7 @@ export function Layout() {
                     component={RouterLink}
                     to={item.path}
                     sx={{
-                      color: active ? brand.espresso900 : brand.slate,
+                      color: active ? brand.ivory : alpha(brand.ivory, 0.72),
                       fontWeight: active ? 600 : 500,
                       letterSpacing: "0.04em",
                       fontSize: "0.875rem",
@@ -92,12 +100,12 @@ export function Layout() {
                         transform: active ? "translateX(-50%) scaleX(1)" : "translateX(-50%) scaleX(0)",
                         width: "55%",
                         height: 2,
-                        bgcolor: brand.gold,
-                        transition: "transform 0.25s ease",
+                        bgcolor: active ? brand.gold : brand.ocean600,
+                        transition: "transform 0.25s ease, background-color 0.25s ease",
                       },
                       "&:hover": {
-                        color: brand.espresso900,
-                        bgcolor: "rgba(197, 165, 114, 0.1)",
+                        color: brand.ivory,
+                        bgcolor: alpha(brand.ocean600, 0.22),
                         "&::after": { transform: "translateX(-50%) scaleX(1)" },
                       },
                     }}
@@ -118,7 +126,7 @@ export function Layout() {
               </Button>
             </Stack>
 
-            <IconButton sx={{ display: { md: "none" }, color: brand.espresso900 }} onClick={() => setMobileOpen(true)} aria-label="Open menu">
+            <IconButton sx={{ display: { md: "none" }, color: brand.ivory }} onClick={() => setMobileOpen(true)} aria-label="Open menu">
               <MenuIcon />
             </IconButton>
           </Toolbar>
@@ -132,20 +140,25 @@ export function Layout() {
         PaperProps={{
           sx: {
             width: 320,
-            bgcolor: brand.paper,
-            color: brand.ink,
-            borderLeft: "1px solid rgba(197, 165, 114, 0.3)",
+            bgcolor: brand.ocean900,
+            color: brand.ivory,
+            borderLeft: `1px solid ${alpha(brand.gold, 0.35)}`,
           },
         }}
       >
-        <Box sx={{ height: 3, bgcolor: brand.gold }} />
+        <Box
+          sx={{
+            height: 3,
+            background: `linear-gradient(90deg, ${brand.ocean600} 0%, ${brand.ocean700} 40%, ${brand.gold} 100%)`,
+          }}
+        />
         <Box sx={{ p: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <BrandLogo compact light={false} />
-          <IconButton onClick={() => setMobileOpen(false)} sx={{ color: brand.espresso900 }} aria-label="Close menu">
+          <BrandLogo compact light />
+          <IconButton onClick={() => setMobileOpen(false)} sx={{ color: brand.ivory }} aria-label="Close menu">
             <CloseIcon />
           </IconButton>
         </Box>
-        <Divider sx={{ borderColor: "rgba(197, 165, 114, 0.25)" }} />
+        <Divider sx={{ borderColor: alpha(brand.gold, 0.28) }} />
         <List sx={{ px: 1, py: 2 }}>
           {navigation.map((item) => (
             <ListItemButton
@@ -157,13 +170,14 @@ export function Layout() {
               sx={{
                 py: 1.75,
                 borderRadius: 0,
+                color: alpha(brand.ivory, 0.8),
                 borderLeft: "3px solid transparent",
                 "&.Mui-selected": {
-                  bgcolor: "rgba(197, 165, 114, 0.12)",
+                  bgcolor: alpha(brand.ocean600, 0.28),
                   borderLeftColor: brand.gold,
-                  color: brand.espresso900,
+                  color: brand.ivory,
                 },
-                "&:hover": { bgcolor: "rgba(197, 165, 114, 0.08)" },
+                "&:hover": { bgcolor: alpha(brand.ocean600, 0.18) },
               }}
             >
               <ListItemText primary={item.name} primaryTypographyProps={{ fontSize: "1rem", letterSpacing: "0.02em" }} />
@@ -187,10 +201,16 @@ export function Layout() {
         sx={{
           mt: "auto",
           color: brand.ivory,
-          background: `linear-gradient(165deg, ${brand.espresso800} 0%, ${brand.espresso900} 55%, #35302b 100%)`,
+          background: `linear-gradient(165deg, ${brand.ocean800} 0%, ${brand.espresso800} 38%, ${brand.espresso900} 62%, #35302b 100%)`,
         }}
       >
-        <Box sx={{ height: 2, bgcolor: brand.gold, opacity: 0.7 }} />
+        <Box
+          sx={{
+            height: 2,
+            background: `linear-gradient(90deg, ${brand.ocean600} 0%, ${brand.gold} 55%, ${brand.goldLight} 100%)`,
+            opacity: 0.85,
+          }}
+        />
         <Container maxWidth="lg" sx={{ py: { xs: 7, md: 9 } }}>
           <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1.5fr 1fr 1fr" }, gap: 6, mb: 6 }}>
             <Box>

@@ -1,10 +1,15 @@
 import { createTheme, alpha } from "@mui/material/styles";
 
 /**
- * Warm espresso + gold — inviting dark accents, never flat black.
- * Navigation uses light surfaces; espresso is for heroes, CTAs, and footer depth.
+ * Ocean depth + warm espresso + gold.
+ * Navigation and structural accents use deep ocean blues; espresso anchors heroes and body warmth.
  */
 export const brand = {
+  ocean900: "#0a1f2e",
+  ocean800: "#0f2d42",
+  ocean700: "#1a4560",
+  ocean600: "#2a6b8a",
+  oceanMist: "#e8f0f4",
   espresso900: "#3d3832",
   espresso800: "#4a4540",
   espresso700: "#5c5650",
@@ -39,7 +44,8 @@ export const surfaces = {
   paper: brand.paper,
   dark: brand.espresso900,
   darkMuted: brand.espresso800,
-  nav: alpha(brand.paper, 0.88),
+  nav: brand.ocean800,
+  navDeep: brand.ocean900,
 };
 
 export const premiumTheme = createTheme({
